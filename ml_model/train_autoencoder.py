@@ -3,7 +3,8 @@ import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader
 
-class IoTDataset(Dataset):
+# Dataset for temperature data
+class TemperatureDataset(Dataset):
     def __init__(self, data):
         self.data = torch.tensor(data, dtype=torch.float32).reshape(-1, 1)
     def __len__(self):
@@ -11,6 +12,7 @@ class IoTDataset(Dataset):
     def __getitem__(self, idx):
         return self.data[idx]
 
+# Autoencoder model
 class Autoencoder(nn.Module):
     def __init__(self):
         super().__init__()
@@ -19,22 +21,23 @@ class Autoencoder(nn.Module):
     def forward(self, x):
         return self.decoder(self.encoder(x))
 
-def generate_training_data(num_samples=1000):
-    data = np.random.normal(loc=25, scale=2, size=num_samples)  # Normal temps
-    return data
+# Generate synthetic normal temperature data
+def generate_normal_data(num_samples=1000):
+    return np.random.normal(loc=25, scale=2, size=num_samples)  # ~25°C
 
+# Train the model
 def train_autoencoder():
     # Data
-    data = generate_training_data()
-    dataset = IoTDataset(data)
+    data = generate_normal_data()
+    dataset = TemperatureDataset(data)
     loader = DataLoader(dataset, batch_size=32, shuffle=True)
 
-    # Model
+    # Model, loss, optimizer
     model = Autoencoder()
     criterion = nn.MSELoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
-    # Training
+    # Training loop
     for epoch in range(50):
         for batch in loader:
             optimizer.zero_grad()
@@ -44,6 +47,7 @@ def train_autoencoder():
             optimizer.step()
         print(f"Epoch {epoch+1}, Loss: {loss.item()}")
 
+    # Save model
     torch.save(model.state_dict(), "autoencoder.pth")
     return model
 

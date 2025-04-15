@@ -2,9 +2,12 @@ import numpy as np
 import json
 import time
 from azure.iot.device import IoTHubDeviceClient, Message
+from dotenv import load_dotenv
+import os
 
-# Replace with your Device Connection String
-CONNECTION_STRING = "YOUR_DEVICE_CONNECTION_STRING"
+# Load .env file
+load_dotenv()
+CONNECTION_STRING = os.getenv("IOT_HUB_CONNECTION_STRING")
 
 def generate_iot_data(num_samples=10):
     client = IoTHubDeviceClient.create_from_connection_string(CONNECTION_STRING)
