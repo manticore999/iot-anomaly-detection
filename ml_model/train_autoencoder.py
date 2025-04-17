@@ -48,7 +48,7 @@ def train_autoencoder():
         print(f"Epoch {epoch+1}, Loss: {loss.item()}")
 
     # Save model
-    torch.save(model.state_dict(), "autoencoder.pth")
+    torch.save(model.state_dict(), "outputs/autoencoder.pth")
     return model
 
 if __name__ == "__main__":
