@@ -12,7 +12,7 @@ The project uses a simple PyTorch autoencoder model for anomaly detection (in ou
 
 Below is the architecture of the system, showing the flow of data through various Azure services:
 
-![IoT Anomaly Detection Architecture](./assets/architecture.png)
+![IoT Anomaly Detection Architecture](./architecture.png)
 
 - **Simulated IoT Devices**: Generate synthetic temperature data with anomalies (In production , it will be replaced by the actual IoT device)
 - **Azure IoT Hub**: Receives data from simulated devices.
