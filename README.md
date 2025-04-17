@@ -32,7 +32,7 @@ Below is the architecture of the system, showing the flow of data through variou
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone <https://github.com/manticore999/iot-anomaly-detection>
 cd IOT-ANOMALY-DETECTION
 ```
 
